@@ -3,146 +3,203 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eff9ff">
+<meta name="theme-color" content="#eaf7ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>冷蔵庫販買マスター</title>
 <style>
-:root{--bg:#f5fbff;--card:#fff;--ink:#173042;--muted:#607887;--line:#dbeaf2;--blue:#147ab3;--blue2:#e7f6ff;--gold:#ffb02e;--green:#178a68;--red:#c84c4c;--shadow:0 10px 30px rgba(30,75,100,.10)}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:linear-gradient(#eff9ff,#f8fbfd);color:var(--ink);font-size:18px;line-height:1.65}
-button{font:inherit}.app{max-width:980px;margin:auto;min-height:100vh;padding-bottom:90px}
-.hero{padding:28px 20px 20px;background:linear-gradient(135deg,#dff4ff,#fff8df);border-bottom:1px solid var(--line)}
-.brandline{display:flex;gap:14px;align-items:center}.fridge{font-size:48px}.hero h1{font-size:32px;margin:0;line-height:1.15}.sub{font-weight:800;color:var(--blue);margin-top:6px}.hero p{margin:14px 0 0;color:var(--muted);font-size:17px}
-.notice{margin:16px 18px;padding:14px 16px;background:#fff;border:1px solid var(--line);border-radius:16px;font-size:15px;color:var(--muted)}
-.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 12px;position:sticky;top:0;z-index:5;background:rgba(245,251,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.tab{border:0;border-radius:14px;padding:11px 6px;background:#fff;color:var(--ink);font-weight:800;font-size:15px;box-shadow:0 2px 8px rgba(30,75,100,.06)}.tab.active{background:var(--blue);color:#fff}
-.section{display:none;padding:18px}.section.active{display:block}.section h2{font-size:27px;margin:8px 0 6px}.lead{color:var(--muted);margin:0 0 18px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
-.card h3{font-size:23px;margin:0 0 4px}.tag{display:inline-block;background:var(--blue2);color:var(--blue);font-weight:800;font-size:14px;padding:4px 9px;border-radius:99px}
-.catch{font-size:18px;font-weight:900;margin:13px 0 8px}.why{background:#fff8e5;border-left:5px solid var(--gold);padding:13px 14px;border-radius:12px;margin:10px 0;font-weight:650}
-.btn{border:0;border-radius:12px;background:var(--blue);color:#fff;padding:11px 14px;font-weight:850;margin-top:10px}.btn.secondary{background:#edf6fb;color:var(--blue)}
-.detail{display:none;margin-top:14px}.detail.open{display:block}.feature{padding:12px 0;border-top:1px solid var(--line)}.feature b{font-size:18px}.customer{margin-top:5px;color:var(--green);font-weight:750}.caution{margin-top:12px;background:#fff0f0;border-radius:12px;padding:12px;color:#8b3a3a;font-size:15px}
-.basic{margin-bottom:12px}.basic .reason{margin-top:8px;background:#eef9f4;border-radius:12px;padding:11px;color:#286954}.basic strong{font-size:21px}
-.selector{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:800}.chip.on{background:#dff4ff;border-color:#76bfe6;color:#075d8e}
-.reco{margin-top:14px}.rank{display:flex;gap:12px;align-items:flex-start}.num{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ffecb5;font-weight:900;flex:0 0 auto}
-.quizbox .q{font-size:22px;font-weight:900;margin-bottom:15px}.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;margin:9px 0;font-weight:700}.opt.correct{background:#e6f8ef;border-color:#62b88f}.opt.wrong{background:#fff0f0;border-color:#df8e8e}.exp{margin-top:14px;border-radius:14px;padding:14px;background:#f3f8fb;display:none}.exp.show{display:block}.score{font-weight:900;color:var(--blue)}
-.footer{padding:20px;text-align:center;color:var(--muted);font-size:13px}
-@media(max-width:680px){body{font-size:17px}.hero h1{font-size:28px}.tabs{grid-template-columns:repeat(4,1fr);gap:5px}.tab{font-size:13px;padding:10px 3px}.grid{grid-template-columns:1fr}.section{padding:14px}.card{padding:16px}.section h2{font-size:25px}}
+:root{--blue:#087bd3;--nav:#073560;--ink:#173249;--muted:#627888;--line:#d8e8f2;--bg:#f3faff;--card:#fff;--green:#179b64;--orange:#f49a20;--pink:#ed5e78;--purple:#7b58bd;--aqua:#00a8aa;--gold:#f4b72a;--shadow:0 8px 24px rgba(22,72,103,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:linear-gradient(180deg,#eaf7ff 0,#f9fcff 34%,#f4f9fc 100%);color:var(--ink);font-size:17px;line-height:1.55}button,input{font:inherit}button{cursor:pointer}.app{max-width:1180px;margin:auto;min-height:100vh;padding-bottom:82px}.topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:10px 14px}.titlewrap{display:flex;align-items:center;gap:10px}.logoMini{width:44px;height:44px;border-radius:13px;background:linear-gradient(145deg,#e3f4ff,#fff);display:grid;place-items:center;box-shadow:inset 0 0 0 1px #cde8f8}.title{font-size:20px;font-weight:950;line-height:1.05}.edition{font-size:12px;color:var(--blue);font-weight:900;letter-spacing:.04em}.userbtn{border:1px solid #cce3f2;background:#fff;border-radius:999px;padding:7px 11px;font-weight:850;color:var(--nav)}
+.hero{margin:14px;border-radius:28px;padding:22px;background:linear-gradient(135deg,#dff5ff 0,#fff 58%,#fff7d9 100%);border:1px solid #d8edf8;display:grid;grid-template-columns:1.35fr .65fr;gap:18px;align-items:center;overflow:hidden;box-shadow:var(--shadow)}.hero h1{font-size:clamp(30px,5vw,54px);margin:0;line-height:1.03;letter-spacing:-.03em}.hero h1 b{color:var(--blue)}.hero p{margin:14px 0 0;font-size:18px}.heroTag{display:inline-flex;gap:7px;align-items:center;background:#fff;border-radius:999px;padding:7px 12px;font-weight:900;color:var(--blue);box-shadow:0 3px 10px rgba(5,99,160,.08)}
+.fridgeHero{height:210px;position:relative;display:grid;place-items:center}.fridgeSvg{width:170px;filter:drop-shadow(0 15px 12px rgba(30,70,90,.15))}.foodbubble{position:absolute;width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:#fff;border:4px solid #e7f5fd;box-shadow:var(--shadow);font-size:45px}.foodbubble.one{left:0;top:10px}.foodbubble.two{right:0;bottom:5px}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 14px 16px}.quickBtn{border:0;background:#fff;border-radius:20px;padding:15px 10px;min-height:116px;box-shadow:var(--shadow);border:1px solid var(--line);text-align:center;color:var(--ink)}.quickBtn .ico{font-size:37px;display:block;margin-bottom:4px}.quickBtn b{font-size:17px}.quickBtn small{display:block;color:var(--muted);margin-top:4px}
+.page{display:none;padding:5px 14px 18px}.page.active{display:block}.pageHead{display:flex;justify-content:space-between;gap:12px;align-items:end;margin:8px 0 14px}.pageHead h2{font-size:30px;margin:0}.pageHead p{margin:0;color:var(--muted)}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:17px;box-shadow:var(--shadow)}.sectionTitle{font-size:23px;font-weight:950;margin:4px 0 12px;display:flex;gap:8px;align-items:center}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.muted{color:var(--muted)}.pill{display:inline-block;border-radius:999px;padding:4px 9px;font-size:13px;font-weight:900;background:#e9f6ff;color:var(--blue)}
+.brandCard{position:relative;overflow:hidden}.brandTop{display:flex;align-items:center;justify-content:space-between;gap:8px}.brandName{font-size:25px;font-weight:950}.brandIcon{font-size:41px}.brandCatch{font-size:18px;font-weight:900;margin:8px 0}.whyBox{background:#fff7df;border-left:5px solid var(--gold);padding:12px;border-radius:12px;margin:10px 0}.whyBox b{color:#9a6800}.featureList{display:grid;gap:8px;margin-top:10px}.featureRow{border-top:1px dashed #dceaf2;padding-top:9px}.featureRow strong{font-size:17px}.toCustomer{font-weight:800;color:var(--green);font-size:14px}.warn{background:#fff3f2;color:#884841;border-radius:12px;padding:10px;margin-top:10px;font-size:14px}.details{display:none;margin-top:8px}.details.open{display:block}.primary,.secondary,.ghost{border:0;border-radius:13px;padding:11px 14px;font-weight:900}.primary{background:var(--blue);color:#fff}.secondary{background:#eaf6ff;color:#076eaf}.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.compareStrip{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-bottom:14px}.compareChip{border:1px solid var(--line);background:#fff;border-radius:15px;padding:10px 4px;text-align:center;font-weight:900;font-size:13px}.compareChip span{font-size:25px;display:block}.compareChip.on{outline:3px solid #8ed2ff;background:#effaff}.matrixWrap{overflow:auto;border-radius:18px;border:1px solid var(--line);background:#fff}.matrix{border-collapse:collapse;min-width:780px;width:100%}.matrix th,.matrix td{padding:11px;border-bottom:1px solid #e2edf4;border-right:1px solid #eef3f6;text-align:center}.matrix th{background:#eff8ff;position:sticky;top:0}.matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:900;position:sticky;left:0;background:#fff;z-index:2}.dot3{font-weight:950;color:var(--green)}
+.basicCard{display:grid;grid-template-columns:65px 1fr;gap:12px;align-items:start}.basicIcon{width:62px;height:62px;border-radius:18px;background:#eaf7ff;display:grid;place-items:center;font-size:34px}.reason{margin-top:8px;background:#eef9f4;padding:10px 12px;border-radius:12px;color:#216a50}.callout{background:linear-gradient(135deg,#fff8de,#fff);border:1px solid #f3d98b;border-radius:18px;padding:14px;margin-top:14px}
+.capacityRow{display:grid;grid-template-columns:70px 1fr 130px;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #e8f0f5}.capacityRow:last-child{border:0}.people{font-size:38px}.liters{font-size:25px;font-weight:950;color:var(--blue)}
+.checklist{display:grid;gap:11px}.check{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:10px;border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff}.check .n{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#edf8ff;color:var(--blue);font-weight:950}.check input{width:25px;height:25px}.danger{background:#fff4e8;border:1px solid #ffd3a0;border-radius:17px;padding:13px;color:#834b18}
+.needs{display:flex;gap:8px;flex-wrap:wrap}.need{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 12px;font-weight:850}.need.on{background:#e5f7ef;color:#087650;border-color:#8ed0b1}.resultCard{margin-top:14px;border:2px solid #d7eaf6;border-radius:20px;padding:15px;background:#fff}.rankLine{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;padding:12px 0;border-bottom:1px solid #edf2f5}.rankLine:last-child{border-bottom:0}.rankNum{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#ffe7a2;font-weight:950}.talk{margin-top:8px;padding:10px;border-radius:12px;background:#f4f8fb}.talk b{color:var(--blue)}
+.quizWrap{max-width:760px;margin:auto}.progress{height:12px;border-radius:999px;background:#e3edf3;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,#1ab36e,#5bc986);transition:.25s}.qText{font-size:22px;font-weight:950;margin:14px 0}.option{width:100%;text-align:left;border:1px solid var(--line);border-radius:14px;background:#fff;padding:13px;margin:7px 0;font-weight:800}.option.correct{background:#e7f8ef;border-color:#63bf91}.option.wrong{background:#fff0ef;border-color:#e79c96}.explain{display:none;background:#f0f7fb;border-radius:14px;padding:13px;margin-top:12px}.explain.show{display:block}.mission{margin-top:14px;text-align:center;background:linear-gradient(135deg,#e9fbf3,#fff);border:1px solid #bfe7d3;border-radius:20px;padding:14px}.bigScore{font-size:48px;font-weight:950;color:var(--green)}
+.favEmpty{text-align:center;color:var(--muted);padding:30px}.favBtn{position:absolute;top:12px;right:12px;border:0;background:#fff;border-radius:50%;width:38px;height:38px;box-shadow:0 3px 12px rgba(0,0,0,.08);font-size:20px}.favBtn.on{background:#fff2c8}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.97);border-top:1px solid #cfe1ec;display:grid;grid-template-columns:repeat(6,1fr);max-width:1180px;margin:auto;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -8px 25px rgba(15,57,88,.08)}.navBtn{border:0;background:transparent;color:#657783;padding:9px 2px 7px;font-size:11px;font-weight:800}.navBtn span{font-size:24px;display:block;line-height:1}.navBtn.active{color:var(--blue);background:#eff9ff}
+.modal{position:fixed;inset:0;background:rgba(5,34,54,.48);z-index:100;display:none;place-items:center;padding:20px}.modal.open{display:grid}.modalBox{background:#fff;border-radius:22px;padding:20px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}.modalBox h3{margin-top:0}.nameInput{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px}
+.sources{font-size:13px;color:var(--muted)}
+@media(max-width:820px){body{font-size:16px}.hero{grid-template-columns:1fr .45fr;padding:17px}.fridgeHero{height:170px}.fridgeSvg{width:125px}.foodbubble{width:70px;height:70px;font-size:34px}.quick{grid-template-columns:repeat(2,1fr)}.grid6,.grid3,.grid2{grid-template-columns:1fr}.compareStrip{grid-template-columns:repeat(3,1fr)}.capacityRow{grid-template-columns:60px 1fr}.capacityRow .liters{grid-column:2}.pageHead{display:block}.pageHead p{margin-top:4px}.bottom{grid-template-columns:repeat(6,1fr)}.navBtn{font-size:10px}.navBtn span{font-size:22px}}
+@media(max-width:520px){.title{font-size:17px}.logoMini{width:38px;height:38px}.userbtn{font-size:13px;padding:6px 8px}.hero{margin:9px;border-radius:21px;grid-template-columns:1fr}.fridgeHero{display:none}.quick{padding:0 9px 12px;gap:8px}.quickBtn{min-height:102px;padding:11px 6px}.page{padding:5px 9px 18px}.pageHead h2{font-size:25px}.card{padding:14px}.compareStrip{gap:5px}.compareChip{font-size:11px;padding:7px 2px}.brandName{font-size:22px}.bottom{overflow-x:auto}.navBtn{min-width:60px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="hero">
- <div class="brandline"><div class="fridge">🧊</div><div><h1>冷蔵庫販買マスター</h1><div class="sub">Risa Edition</div></div></div>
- <p>スペック暗記ではなく、<b>「なぜこのメーカー・機能を勧めるのか」</b>まで理解する販売員向け学習アプリ。</p>
+<header class="topbar">
+  <div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition</div></div></div>
+  <button class="userbtn" id="userBtn">👤 <span id="userName">Risa</span>さん</button>
 </header>
-<div class="notice">2026年8月時点の各メーカー公式情報をもとにした初版。機能はシリーズ・容量により搭載状況が異なるため、実売時は対象型番の仕様確認が前提です。</div>
-<nav class="tabs">
-<button class="tab active" data-target="brands">メーカー</button>
-<button class="tab" data-target="basic">基礎</button>
-<button class="tab" data-target="sales">販買診断</button>
-<button class="tab" data-target="quiz">問題</button>
+
+<section id="home" class="page active">
+  <div class="hero">
+    <div><span class="heroTag">👑 販売員向け・理由で覚える</span><h1><b>冷蔵庫</b><br>販買マスター</h1><p>「このメーカーが良い」だけで終わらない。<b>なぜ良いのか → どんなお客様に合うのか</b>まで、絵と一緒に覚えよう。</p></div>
+    <div class="fridgeHero"><svg class="fridgeSvg" viewBox="0 0 180 250" aria-label="冷蔵庫イラスト"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#f9fdff"/><stop offset="1" stop-color="#c9d9e3"/></linearGradient></defs><rect x="32" y="8" width="116" height="232" rx="15" fill="url(#g)" stroke="#577383" stroke-width="4"/><line x1="32" y1="105" x2="148" y2="105" stroke="#577383" stroke-width="4"/><line x1="32" y1="160" x2="148" y2="160" stroke="#577383" stroke-width="4"/><line x1="90" y1="8" x2="90" y2="105" stroke="#7b929f" stroke-width="3"/><rect x="124" y="42" width="5" height="35" rx="3" fill="#587789"/><rect x="124" y="121" width="5" height="24" rx="3" fill="#587789"/></svg><div class="foodbubble one">🥬</div><div class="foodbubble two">🥩</div></div>
+  </div>
+  <div class="quick">
+    <button class="quickBtn" data-go="compare"><span class="ico">⚖️</span><b>メーカー比較</b><small>6社の強みを理由で比較</small></button>
+    <button class="quickBtn" data-go="basics"><span class="ico">📘</span><b>冷蔵庫の基礎</b><small>容量・部屋・省エネ</small></button>
+    <button class="quickBtn" data-go="sales"><span class="ico">🛒</span><b>販買モード</b><small>暮らしから候補を診断</small></button>
+    <button class="quickBtn" data-go="quiz"><span class="ico">📝</span><b>今日のミニテスト</b><small>理由で答える10問</small></button>
+    <button class="quickBtn" data-go="capacity"><span class="ico">📏</span><b>容量の選び方</b><small>人数＋買い方で判断</small></button>
+    <button class="quickBtn" data-go="install"><span class="ico">🚚</span><b>設置・搬入</b><small>置ける？通る？を確認</small></button>
+    <button class="quickBtn" data-go="favorites"><span class="ico">⭐</span><b>お気に入り</b><small>気になるメーカーを保存</small></button>
+    <button class="quickBtn" id="missionBtn"><span class="ico">🎯</span><b>今日のミッション</b><small><span id="missionHome">0</span>/10 問クリア</small></button>
+  </div>
+  <div class="page" style="display:block;padding-top:0"><div class="card"><div class="sectionTitle">💡 今日の販売ポイント</div><div id="dailyTip">冷凍重視？ 野菜重視？ まず「よく使う部屋」を聞くと、メーカー提案の理由が作りやすい。</div></div></div>
+</section>
+
+<section id="compare" class="page">
+ <div class="pageHead"><div><h2>⚖️ 6メーカー徹底比較</h2><p>機能名ではなく「何が便利か」で比べる。</p></div><button class="ghost" data-go="favorites">⭐ お気に入りを見る</button></div>
+ <div class="compareStrip" id="brandStrip"></div>
+ <div class="grid6" id="brandGrid"></div>
+ <div class="card" style="margin-top:14px"><div class="sectionTitle">📊 一目で比較</div><div class="matrixWrap"><table class="matrix" id="matrix"></table></div></div>
+ <div class="sources" style="margin-top:12px">※機能はシリーズ・容量・型番で異なります。販売時は対象型番のメーカー公式仕様を確認してください。</div>
+</section>
+
+<section id="basics" class="page">
+ <div class="pageHead"><div><h2>📘 冷蔵庫の基礎</h2><p>メーカーを勧める前に、まず選び方の土台を固める。</p></div></div>
+ <div class="grid2" id="basicGrid"></div>
+ <div class="callout"><b>💡 接客のコツ</b><br>「何人家族ですか？」だけでは容量は決まりません。<b>買い物頻度・冷凍食品・作り置き・野菜の量・設置寸法</b>まで聞くと提案精度が上がります。</div>
+</section>
+
+<section id="capacity" class="page">
+ <div class="pageHead"><div><h2>📏 容量の選び方</h2><p>人数はスタート地点。買い方と冷凍量で前後させる。</p></div></div>
+ <div class="card" id="capacityList"></div>
+ <div class="grid3" style="margin-top:14px">
+   <div class="card"><div class="sectionTitle">🛍️ まとめ買い</div><p>週1回のまとめ買いなら、人数目安より<b>余裕を持った容量</b>を検討。</p><div class="reason">理由：冷蔵・冷凍の空きが少ないと、整理しづらく食品も見失いやすい。</div></div>
+   <div class="card"><div class="sectionTitle">❄️ 冷凍食品</div><p>定格内容積だけでなく、<b>冷凍室の食品収納スペース目安・段数</b>を見る。</p><div class="reason">理由：同じ容量表記でもケース構成で実際の使い勝手が変わる。</div></div>
+   <div class="card"><div class="sectionTitle">🍱 作り置き</div><p>冷蔵室の棚間隔・チルド系スペース・急冷機能も確認。</p><div class="reason">理由：保存容器を多く置く家庭は、棚の自由度が満足度に直結する。</div></div>
+ </div>
+</section>
+
+<section id="install" class="page">
+ <div class="pageHead"><div><h2>🚚 設置・搬入チェック</h2><p>「置ける」と「運べる」と「使いやすい」は別。</p></div><button class="secondary" id="resetChecks">チェックをリセット</button></div>
+ <div class="checklist" id="checklist"></div>
+ <div class="danger" style="margin-top:14px"><b>⚠️ 大事</b><br>放熱スペースはメーカー・型番で異なります。ここでは固定寸法を断定せず、<b>対象機種の設置必要寸法</b>を確認する前提にしています。</div>
+</section>
+
+<section id="sales" class="page">
+ <div class="pageHead"><div><h2>🛒 販買モード</h2><p>お客様の暮らしを選ぶと、理由つきで候補を表示。</p></div></div>
+ <div class="card"><div class="sectionTitle">💬 お客様のニーズ</div><div class="needs" id="needs"></div><button class="primary" id="diagnose" style="margin-top:14px">おすすめ候補を見る</button><div id="diagnosis"></div></div>
+</section>
+
+<section id="quiz" class="page">
+ <div class="pageHead"><div><h2>📝 今日のミニテスト</h2><p>スペック暗記ではなく、提案理由を理解する10問。</p></div></div>
+ <div class="card quizWrap"><div style="display:flex;justify-content:space-between;font-weight:900"><span id="qCount">1 / 10</span><span>正解 <span id="qScore">0</span></span></div><div class="progress"><div id="qProgress" style="width:10%"></div></div><div id="quizArea"></div><button id="nextQ" class="primary" style="display:none;margin-top:12px">次の問題へ</button><button id="restartQ" class="secondary" style="display:none;margin-top:12px">もう一度10問</button></div>
+</section>
+
+<section id="favorites" class="page">
+ <div class="pageHead"><div><h2>⭐ お気に入り</h2><p>比較したいメーカーをここに残せる。</p></div></div><div id="favGrid" class="grid3"></div>
+</section>
+
+<nav class="bottom">
+ <button class="navBtn active" data-go="home"><span>🏠</span>ホーム</button>
+ <button class="navBtn" data-go="compare"><span>⚖️</span>比較</button>
+ <button class="navBtn" data-go="basics"><span>📘</span>基礎</button>
+ <button class="navBtn" data-go="sales"><span>🛒</span>販買</button>
+ <button class="navBtn" data-go="quiz"><span>📝</span>テスト</button>
+ <button class="navBtn" data-go="favorites"><span>⭐</span>保存</button>
 </nav>
-
-<section id="brands" class="section active">
-<h2>6メーカー徹底比較</h2>
-<p class="lead">「何があるか」より、<b>“それがお客様に何をもたらすか”</b>で覚える。</p>
-<div id="brandGrid" class="grid"></div>
-</section>
-
-<section id="basic" class="section">
-<h2>冷蔵庫の基礎</h2>
-<p class="lead">接客前半で外すと、後半のメーカー提案が全部ズレるポイント。</p>
-<div id="basicList"></div>
-</section>
-
-<section id="sales" class="section">
-<h2>販買診断</h2>
-<p class="lead">お客様の暮らしから候補を絞る。複数選択OK。</p>
-<div class="card">
-<div class="selector" id="chips"></div>
-<button class="btn" id="diagnose">候補を見る</button>
-<div id="reco" class="reco"></div>
 </div>
-</section>
 
-<section id="quiz" class="section">
-<h2>理解度チェック</h2>
-<p class="lead">機能名ではなく「理由」で選ぶ問題。</p>
-<div class="card quizbox">
-<div class="score" id="score">0 / 0</div>
-<div id="quizArea"></div>
-<button class="btn secondary" id="nextQ" style="display:none">次の問題</button>
-</div>
-</section>
-
-<div class="footer">冷蔵庫販買マスター • Risa Edition</div>
-</div>
+<div class="modal" id="userModal"><div class="modalBox"><h3>マイページ</h3><label>表示名</label><input class="nameInput" id="nameInput" maxlength="12"><div class="mission"><div class="muted">今日のミッション</div><div class="bigScore"><span id="modalMission">0</span>/10</div><div>正解するほど進みます</div></div><div style="display:flex;gap:8px;margin-top:14px"><button class="primary" id="saveName">保存</button><button class="ghost" id="closeModal">閉じる</button></div></div></div>
 
 <script>
-const DATA = {"brands": [{"id": "panasonic", "name": "Panasonic", "tag": "時短調理・冷凍活用", "catch": "『冷凍した後まで使いやすい』を重視するお客様に強い", "why": "約−3℃の微凍結で肉・魚を凍らせきらず保存し、解凍せず切り分けやすいのが大きな理由。対象機種では急速冷凍・粗熱取りなど、作り置きとの相性も良い。", "features": [["サクッと切れる微凍結", "約−3℃で微凍結。肉や魚を解凍せず、必要な分だけ使いやすい。", "まとめ買いした肉・魚を数日で使い切る人。冷凍→解凍の手間を減らしたい人。"], ["クーリングアシスト系", "対象機種では急速冷凍や粗熱取りをサポート。", "作り置き・弁当づくりが多い家庭。"], ["使いやすい引き出し", "シリーズによりフルオープン系の引き出しを採用。", "奥の食品を忘れやすい人、整理性重視。"]], "caution": "シリーズによって微凍結・急速冷凍などの搭載差が大きい。『パナなら全部できる』とは言わない。"}, {"id": "hitachi", "name": "日立", "tag": "冷蔵室・作り置き", "catch": "『冷蔵室そのものを広くチルド感覚で使いたい』人に強い", "why": "対象機種の『まるごとチルド』は冷蔵室全段を約2℃のチルド温度帯にし、うるおい冷気で乾燥を抑える設計。専用チルドルームに入りきらない作り置きも置き場所を選びにくい。", "features": [["まるごとチルド", "冷蔵室全段を約2℃のチルド温度帯で使う機能（ドアポケット除く）。", "作り置き、お惣菜、冷蔵食品を多く入れる家庭。"], ["特鮮氷温ルーム", "約−1℃で肉や魚を凍らせず低温保存する考え方。", "肉・魚を冷凍せず数日で使いたい人。"], ["ぴったりセレクト", "対象シリーズでは下段スペースの使い方を冷凍・冷蔵など生活に合わせて変更可能。", "冷凍派・野菜派が生活変化で変わりそうな家庭。"]], "caution": "まるごとチルドは全機種搭載ではない。設定時の消費電力量条件なども機種説明で確認。"}, {"id": "mitsubishi", "name": "三菱電機", "tag": "冷凍・解凍いらず", "catch": "『冷凍するけど、料理するとき面倒なのは嫌』に強い", "why": "『切れちゃう瞬冷凍A.I.』は芯から均一に凍らせる独自方式で、冷凍した食材を解凍せず扱いやすいのが販売上の大きな価値。さらに氷点下ストッカーで肉・魚を生のまま低温保存する選択肢もある。", "features": [["切れちゃう瞬冷凍A.I.", "冷凍なのに解凍せず切り分け・すくい取りしやすい。", "挽肉・肉・ソース・作り置きを小分けで使う人。"], ["氷点下ストッカーD A.I.", "肉・魚を凍らせず氷点下帯で保存する独自機能。", "生鮮食品を冷凍せず使いたい人。"], ["朝どれ野菜室", "野菜の保存を考えた専用室。", "冷凍だけでなく野菜保存も重視する家庭。"]], "caution": "『瞬冷凍＝一瞬で凍る』という意味ではない。仕組みと“解凍せず使いやすい”価値を分けて説明する。"}, {"id": "toshiba", "name": "東芝", "tag": "野菜・真ん中野菜室", "catch": "『野菜をよく使う』『重い野菜をラクに出したい』に強い", "why": "『もっと潤う 摘みたて野菜室』はうるおい冷気を送り、エチレンガスを分解する仕組みで鮮度保持を狙う。さらに主力VEGETAでは野菜室が真ん中のモデルがあり、保存性能と取り出しやすさをセットで提案しやすい。", "features": [["もっと潤う 摘みたて野菜室", "うるおい冷気＋エチレンガス分解で野菜の鮮度保持を狙う。", "野菜をまとめ買いする人、サラダ・野菜料理が多い人。"], ["野菜室がまんなか", "重い野菜を低い位置までかがまず出し入れしやすい。", "毎日野菜室を使う人、腰への負担を減らしたい人。"], ["3段冷凍室", "食品を高さ・用途で分けやすい。", "冷凍食品が多く、整理しやすさも欲しい人。"]], "caution": "野菜保存の日数は試験条件付き。実使用で必ず同じ日数もつと断定しない。"}, {"id": "sharp", "name": "SHARP", "tag": "ドア・収納・清潔", "catch": "『置き場所や動線に合わせたい』『冷凍もたっぷり欲しい』に強い", "why": "独自の『どっちもドア』は1枚の扉を左右どちらからも開けられ、キッチン動線や引っ越し時の自由度が高い。大容量冷凍のメガフリーザーや、対象機種のプラズマクラスターも組み合わせて提案できる。", "features": [["どっちもドア", "1枚の冷蔵室ドアを左右どちらからも開けられる独自構造。", "キッチンの左右どちらからもアクセスしたい人、転居可能性がある人。"], ["メガフリーザー", "大容量冷凍室と整理しやすいケース構成。", "冷凍食品・まとめ買いが多い家庭。"], ["プラズマクラスター", "対象機種で冷気除菌など庫内清潔性をサポート。", "庫内の清潔性を重視する人。"]], "caution": "『どっちもドア』と『つけかえどっちもドア』は別。前者は左右から開く、後者は扉の開く向きを付け替える方式。"}, {"id": "aqua", "name": "AQUA", "tag": "薄型・大容量冷凍・デザイン", "catch": "『大容量が欲しいけど奥行きを抑えたい』『冷凍重視』に強い", "why": "TZシリーズは大容量ながら薄型設計で、庫内を見渡しやすく奥まで手が届きやすいことが特徴。AQUAは大容量冷凍や『おいシールド冷凍』など冷凍を軸にした提案がしやすい。", "features": [["TZシリーズの薄型設計", "大容量と薄型を両立し、奥の食品へのアクセス性を高める。", "キッチンの出っ張りを抑えたい人、奥行き深い冷蔵庫が苦手な人。"], ["大容量冷凍", "まとめ買い・作り置きを多く収納しやすい。", "冷凍食品、ふるさと納税、コストコ利用などが多い家庭。"], ["おいシールド冷凍", "冷凍室内の温度変化を抑え、冷凍保存のおいしさ維持を狙う。", "冷凍食品を長くストックする人。"]], "caution": "AQUAはシリーズごとの構造差が大きい。TZ・TX・DELIE+など、見た目だけでなく冷凍室構成・野菜室位置まで確認。"}], "basics": [["容量", "人数だけで決めず、買い物頻度・まとめ買い・冷凍量・作り置き量まで聞く。", "同じ4人家族でも毎日買う家庭と週1まとめ買いでは必要容量が変わるため。"], ["設置寸法", "本体幅だけでなく、放熱スペース・扉の開き・コンセント位置まで確認。", "『置ける』と『使える』は別。壁際では扉や引き出しが干渉する場合があるため。"], ["搬入経路", "玄関・廊下・階段・曲がり角・手すり・エレベーターを確認。", "設置場所に入っても、そこまで運べなければ納品できないため。"], ["ドアタイプ", "片開き、フレンチ、どっちもドア等を動線で選ぶ。", "毎日何十回も開けるため、機能差以上に使い勝手へ影響することがある。"], ["真ん中の部屋", "冷凍室真ん中か野菜室真ん中か、使用頻度で決める。", "よく使う引き出しが腰〜太もも付近にあると、出し入れがラク。"], ["冷凍室", "定格内容積だけでなく『食品収納スペースの目安』と段数を見る。", "カタログ容量が大きくても、ケース構成で実際の収納性が変わるため。"], ["年間消費電力量", "容量が大きい＝必ず電気代が高い、ではない。", "断熱・制御・機種設計で差があるため、年間消費電力量で比較する。"]], "questions": [{"q": "肉や魚をまとめ買いするが、冷凍した食材を毎回解凍するのが面倒。最も提案理由が明確なのは？", "opts": ["三菱電機：切れちゃう瞬冷凍A.I.", "東芝：野菜室がまんなか", "SHARP：どっちもドア", "日立：まるごとチルド"], "a": 0, "exp": "三菱の切れちゃう瞬冷凍A.I.は、冷凍後も解凍せず切り分け・取り分けしやすいことが価値。お客様の『解凍が面倒』という困りごとに直接つながる。"}, {"q": "作り置きのおかずを冷蔵室にたくさん入れる。専用チルド室だけでは足りないお客様に提案しやすい機能は？", "opts": ["日立：まるごとチルド", "AQUA：TZシリーズ薄型設計", "SHARP：メガフリーザー", "東芝：3段冷凍室"], "a": 0, "exp": "日立のまるごとチルドは、対象機種で冷蔵室全段を約2℃のチルド温度帯にする機能。置き場所を限定しにくい点が理由。"}, {"q": "野菜を週1回まとめ買いし、野菜室を毎日使う。『なぜ東芝？』の説明として適切なのは？", "opts": ["野菜保存機能と真ん中野菜室の使いやすさを両方提案できるから", "冷凍室が必ず国内最大だから", "全機種にタッチオープンがあるから", "肉を完全冷凍せず保存する専用室が全機種にあるから"], "a": 0, "exp": "東芝は野菜の鮮度保持を狙う機能に加え、主力モデルで真ん中野菜室を採用。保存＋出し入れのしやすさを理由にできる。"}, {"q": "転勤があり、次の家で冷蔵庫の左右どちらに壁が来るかわからない。候補として理由が明確なのは？", "opts": ["SHARP：どっちもドア", "Panasonic：微凍結", "三菱電機：氷点下ストッカー", "東芝：摘みたて野菜室"], "a": 0, "exp": "どっちもドアは左右どちらからも開けられるため、設置環境や動線が変わる可能性がある家庭に理由をつけて提案しやすい。"}, {"q": "大容量冷蔵庫が欲しいが、キッチン通路への出っ張りをなるべく抑えたい。まず比較候補に入れたいのは？", "opts": ["AQUA：TZシリーズ", "日立：特鮮氷温ルーム", "三菱電機：朝どれ野菜室", "SHARP：プラズマクラスター"], "a": 0, "exp": "AQUA TZシリーズは大容量ながら薄型設計を特徴としており、奥行きを抑えたい要望と結びつく。"}, {"q": "Panasonicの『サクッと切れる微凍結』を勧める理由として最も適切なのは？", "opts": ["約−3℃で微凍結し、肉や魚を解凍せず使いやすいから", "野菜室が必ず真ん中だから", "左右どちらからでも扉を開けられるから", "冷蔵室全体が約2℃になるから"], "a": 0, "exp": "約−3℃の微凍結で、肉・魚などを解凍せず切り分けやすいことが中心価値。"}]};
-const brandGrid=document.getElementById('brandGrid');
-DATA.brands.forEach(b=>{
- const el=document.createElement('article');el.className='card';
- el.innerHTML=`<span class="tag">${b.tag}</span><h3>${b.name}</h3><div class="catch">${b.catch}</div>
- <div class="why"><b>なぜ？</b><br>${b.why}</div>
- <button class="btn secondary">機能と接客理由を見る</button>
- <div class="detail">${b.features.map(f=>`<div class="feature"><b>${f[0]}</b><div>${f[1]}</div><div class="customer">▶ 向くお客様：${f[2]}</div></div>`).join('')}
- <div class="caution"><b>接客注意</b><br>${b.caution}</div></div>`;
- el.querySelector('button').onclick=()=>{const d=el.querySelector('.detail');d.classList.toggle('open');el.querySelector('button').textContent=d.classList.contains('open')?'閉じる':'機能と接客理由を見る'};
- brandGrid.appendChild(el);
-});
-const basic=document.getElementById('basicList');
-DATA.basics.forEach(x=>{basic.innerHTML+=`<div class="card basic"><strong>${x[0]}</strong><div>${x[1]}</div><div class="reason"><b>なぜ確認する？</b> ${x[2]}</div></div>`});
-
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
- document.querySelectorAll('.tab,.section').forEach(x=>x.classList.remove('active'));
- t.classList.add('active');document.getElementById(t.dataset.target).classList.add('active');
-});
-
-const needs=[
-["冷凍食品が多い","freeze"],["作り置きが多い","prep"],["肉・魚をよく買う","meat"],["野菜をよく買う","veg"],
-["奥行きを抑えたい","thin"],["左右の動線が気になる","door"],["解凍が面倒","noThaw"],["庫内の清潔性重視","clean"]
+const BRANDS=[
+{id:'panasonic',name:'Panasonic',jp:'パナソニック',icon:'🥩',tag:'微凍結・時短',catch:'肉・魚を「冷凍しすぎず」使いやすく',why:'対象機種の「サクッと切れる微凍結」は約−3℃で微凍結し、肉や魚を解凍せず切り分けやすい。調理の手間を減らしたい人に理由をつけて提案しやすい。',features:[['サクッと切れる微凍結','約−3℃の微凍結で、解凍せず切り分けやすい。','肉・魚をまとめ買いして数日で使う人'],['クーリングアシスト','対象機種で急冷・急凍・粗熱取りなどをサポート。','作り置き・弁当づくりが多い人'],['収納・使いやすさ','シリーズごとに引き出しや棚の工夫。','奥の食品を見失いたくない人']],caution:'微凍結・クーリングアシストなどは搭載機種を確認。',rates:{冷凍:4,野菜:3,冷蔵:4,動線:3,省スペース:3}},
+{id:'hitachi',name:'HITACHI',jp:'日立',icon:'🍱',tag:'冷蔵・作り置き',catch:'冷蔵室を広くチルド感覚で使いやすい',why:'対象機種の「まるごとチルド」は冷蔵室全段を約2℃のチルド温度帯にする考え方。作り置きや惣菜をたくさん入れる家庭で、置き場所を選びにくいのが強み。',features:[['まるごとチルド','冷蔵室全段を約2℃のチルド温度帯に。※ドアポケット除く','作り置き・惣菜・冷蔵食品が多い人'],['特鮮氷温ルーム','約−1℃で肉・魚を凍らせず低温保存。','生鮮を冷凍せず使いたい人'],['ぴったりセレクト','対象機種では引き出しを野菜・冷凍・冷蔵から選べる。','暮らしに合わせて部屋の用途を変えたい人']],caution:'2026年モデルはシリーズによって、まるごとチルド・真空氷温・ぴったりセレクト等の構成が異なる。',rates:{冷凍:4,野菜:4,冷蔵:5,動線:4,省スペース:3}},
+{id:'mitsubishi',name:'MITSUBISHI',jp:'三菱電機',icon:'❄️',tag:'解凍いらず・冷凍',catch:'冷凍しても必要な分だけ使いやすい',why:'「切れちゃう瞬冷凍A.I.」は冷凍後も切り分け・すくい取りしやすいのが価値。さらに氷点下ストッカー系で、肉・魚を凍らせず低温保存する選択肢もある。',features:[['切れちゃう瞬冷凍A.I.','解凍せず切る・すくう・必要量だけ使いやすい。','冷凍食材の解凍が面倒な人'],['ひろびろ氷点下ストッカーD A.I.','肉・魚を凍らせず氷点下帯で保存。','生鮮を冷凍せず数日で使う人'],['朝どれ野菜室','野菜の保存を考えた専用室。','冷凍だけでなく野菜も重視する人']],caution:'「瞬冷凍＝一瞬で凍る」という意味ではない。価値は解凍せず扱いやすいこと。',rates:{冷凍:5,野菜:4,冷蔵:4,動線:3,省スペース:3}},
+{id:'toshiba',name:'TOSHIBA',jp:'東芝',icon:'🥬',tag:'野菜・真ん中野菜室',catch:'野菜をよく使う人に理由が作りやすい',why:'「もっと潤う 摘みたて野菜室」は野菜の鮮度保持を狙う機能。主力機では「野菜室がまんなか」もあり、保存性能だけでなく毎日の出し入れのラクさまで提案できる。',features:[['もっと潤う 摘みたて野菜室','うるおいを保ちながら野菜の鮮度保持を狙う。','野菜をまとめ買いする人'],['野菜室がまんなか','料理中に野菜を出し入れしやすい位置。','毎日野菜を使う人'],['3段冷凍室','食品を高さ・用途別に整理しやすい。','冷凍食品もきれいに収納したい人']],caution:'保存日数は試験条件付き。実使用で必ず同じ日数もつとは断定しない。',rates:{冷凍:4,野菜:5,冷蔵:4,動線:4,省スペース:3}},
+{id:'sharp',name:'SHARP',jp:'シャープ',icon:'↔️',tag:'ドア・大容量冷凍',catch:'置き場所・動線の変化に対応しやすい',why:'独自の「どっちもドア」は1枚の扉を左右どちらからも開けられ、壁際・キッチン動線・引っ越し時にも使い勝手を保ちやすい。大容量冷凍「メガフリーザー」も提案軸になる。',features:[['どっちもドア','1枚の冷蔵室ドアを左右どちらからも開けられる。','動線・壁位置・転居可能性が気になる人'],['メガフリーザー','大容量冷凍室でまとめ買いに対応。','冷凍食品・まとめ買いが多い人'],['プラズマクラスター','対象機種で庫内の清潔性をサポート。','庫内清潔を重視する人']],caution:'「どっちもドア」と「つけかえどっちもドア」は別方式。型番確認が必須。',rates:{冷凍:5,野菜:3,冷蔵:4,動線:5,省スペース:4}},
+{id:'aqua',name:'AQUA',jp:'アクア',icon:'🧊',tag:'薄型・大容量冷凍',catch:'奥行きを抑えつつ冷凍をたっぷり使いたい',why:'TZシリーズは大容量ながら薄型設計を特徴とし、奥の食品を見渡しやすい。AQUAは「おいシールド冷凍」など冷凍保存を軸にした提案がしやすい。',features:[['TZシリーズの薄型設計','大容量でも奥行きを抑え、見渡しやすさを狙う。','通路への出っ張りを抑えたい人'],['おいシールド冷凍','霜取り時などの温度変化を抑え、おいしさ維持を狙う。','冷凍ストックが多い人'],['旬鮮冷凍など','対象機種で冷凍を使った保存・調理を支援。','作り置き・まとめ買いが多い人']],caution:'TZ・TXなどシリーズで機能構成が異なる。薄型寸法・冷凍機能は型番確認。',rates:{冷凍:5,野菜:3,冷蔵:3,動線:4,省スペース:5}}
 ];
-const chipBox=document.getElementById('chips');
-needs.forEach(([n,k])=>{let c=document.createElement('button');c.className='chip';c.dataset.k=k;c.textContent=n;c.onclick=()=>c.classList.toggle('on');chipBox.appendChild(c)});
-document.getElementById('diagnose').onclick=()=>{
- const s=[...document.querySelectorAll('.chip.on')].map(x=>x.dataset.k);
- const scores={panasonic:0,hitachi:0,mitsubishi:0,toshiba:0,sharp:0,aqua:0};
- const reasons={};
- const add=(id,p,r)=>{scores[id]+=p;(reasons[id]??=[]).push(r)}
- if(s.includes('freeze')){add('mitsubishi',3,'解凍いらずの冷凍提案が強い');add('sharp',2,'大容量冷凍を提案しやすい');add('aqua',3,'大容量冷凍が得意');add('toshiba',2,'3段冷凍室で整理しやすい');add('panasonic',2,'急速冷凍系が候補')}
- if(s.includes('prep')){add('hitachi',3,'冷蔵室全体を活用しやすい');add('panasonic',3,'微凍結・急速冷却系と相性');add('mitsubishi',2,'瞬冷凍で使う分だけ取りやすい')}
- if(s.includes('meat')){add('mitsubishi',4,'氷点下ストッカー＋瞬冷凍');add('panasonic',3,'約−3℃微凍結');add('hitachi',3,'特鮮氷温ルーム')}
- if(s.includes('veg')){add('toshiba',4,'野菜保存＋真ん中野菜室');add('sharp',2,'対象上位機で野菜保存を強化');add('mitsubishi',2,'朝どれ野菜室')}
- if(s.includes('thin')){add('aqua',4,'TZの薄型設計');add('sharp',3,'薄型シリーズが候補')}
- if(s.includes('door')){add('sharp',5,'どっちもドアが明確')}
- if(s.includes('noThaw')){add('mitsubishi',5,'切れちゃう瞬冷凍');add('panasonic',4,'微凍結で解凍不要')}
- if(s.includes('clean')){add('sharp',4,'プラズマクラスター搭載機が候補')}
- const order=Object.entries(scores).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>0).slice(0,3);
- const reco=document.getElementById('reco');
- if(!order.length){reco.innerHTML='<p>気になる項目を1つ以上選んでください。</p>';return}
- reco.innerHTML='<h3>候補メーカー</h3>'+order.map(([id,sc],i)=>{let b=DATA.brands.find(x=>x.id===id);return `<div class="feature rank"><div class="num">${i+1}</div><div><b>${b.name}</b><div>${b.catch}</div><div class="customer">理由：${(reasons[id]||[]).join('／')}</div></div></div>`}).join('')+'<div class="caution">診断は候補を絞るための学習用。最終提案は容量・設置・予算・型番ごとの搭載機能を確認してください。</div>';
+const BASICS=[
+['👨‍👩‍👧','容量','人数だけで決めず、買い物頻度・まとめ買い・冷凍量・作り置きまで聞く。','同じ4人家族でも、毎日買う家庭と週1まとめ買いでは必要な余裕が違うため。'],
+['📐','設置寸法','本体幅だけでなく、奥行・高さ・放熱スペース・扉の開閉まで確認。','「置ける」だけでなく、扉・引き出しを使えることが必要だから。'],
+['🚚','搬入経路','玄関・廊下・階段・曲がり角・エレベーター・手すりを確認。','設置場所に収まっても、そこまで運べなければ納品できないため。'],
+['🚪','ドアタイプ','片開き・フレンチ・どっちもドアなどをキッチン動線で選ぶ。','毎日何度も開けるので、機能以上に満足度へ影響することがある。'],
+['❄️','冷凍室','定格容量だけでなく食品収納スペース目安・段数・引き出し構成を見る。','ケース構成で、冷凍食品の整理・取り出しやすさが変わるため。'],
+['🥬','野菜室','保存機能だけでなく「真ん中か下段か」も見る。','野菜を毎日使う家庭では、腰をかがめる回数や動線が大きく変わるため。'],
+['💡','年間消費電力量','「大容量＝必ず電気代が高い」と決めつけず、年間消費電力量で比較。','断熱・制御・構造で省エネ性能が異なるため。'],
+['🔌','コンセント','位置・高さ・差し込みやすさを事前確認。','設置後にプラグへアクセスできないと、メンテナンス時に困るため。']
+];
+const CAP=[['👤','1人暮らし','〜200L前後','自炊頻度が低いならコンパクト。自炊・冷凍が多いなら上へ。'],['👫','1〜2人','200〜350L前後','自炊やまとめ買いの頻度で余裕を持たせる。'],['👨‍👩‍👧','2〜3人','300〜450L前後','冷凍・作り置きが増える家庭は400L級も検討。'],['👨‍👩‍👧‍👦','3〜4人','400〜550L前後','家族分の冷凍・野菜・作り置きスペースを確保しやすい。'],['👨‍👩‍👧‍👦','4人以上','500L以上も候補','大家族・まとめ買い・作り置きが多いほど大容量のメリットが出やすい。']];
+const CHECKS=[['本体寸法','幅・奥行・高さを設置場所と照合'],['放熱スペース','左右・上部・背面など、対象型番の必要寸法を確認'],['扉の開閉','壁・食器棚・カウンターに干渉しないか確認'],['引き出し','野菜室・冷凍室を十分引き出せるか確認'],['玄関・廊下','最狭部の幅と高さを確認'],['曲がり角','冷蔵庫を回転させるスペースがあるか確認'],['階段・エレベーター','幅・高さ・踊り場・手すりを確認'],['段差・床','段差、床保護、搬入時の養生が必要か確認'],['コンセント','位置と差し込みやすさを確認']];
+const NEEDS=[['冷凍食品が多い','freeze'],['作り置きが多い','prep'],['肉・魚をよく買う','meat'],['野菜をよく使う','veg'],['奥行きを抑えたい','thin'],['左右の動線が気になる','door'],['解凍が面倒','nothaw'],['庫内の清潔性重視','clean'],['暮らしに合わせて部屋を変えたい','flex']];
+const QUIZ=[
+['肉や魚を冷凍した後、毎回の解凍をできるだけ減らしたい。最も理由が明確な候補は？',['三菱電機：切れちゃう瞬冷凍A.I.','東芝：野菜室がまんなか','SHARP：どっちもドア','日立：まるごとチルド'],0,'三菱の切れちゃう瞬冷凍A.I.は、冷凍後も解凍せず切り分け・取り分けしやすい点が、お客様の困りごとに直接つながります。'],
+['作り置きを冷蔵室にたくさん置きたい。専用チルド室だけでは足りない人へ提案しやすいのは？',['日立：まるごとチルド','AQUA：TZシリーズ薄型設計','SHARP：メガフリーザー','東芝：3段冷凍室'],0,'日立のまるごとチルドは、対象機種で冷蔵室全段を約2℃のチルド温度帯にするため、作り置きの置き場所を選びにくいのが理由です。'],
+['野菜を毎日使い、野菜室の出し入れ回数が多い。東芝を勧める理由として適切なのは？',['野菜保存機能と真ん中野菜室を組み合わせて提案できる','全機種で冷凍室が国内最大','全機種で左右どちらからも開く','全機種に真空ルームがある'],0,'東芝は野菜の鮮度保持を狙う機能に加え、対象機種では野菜室がまんなか。保存と出し入れの両面で理由を作れます。'],
+['引っ越しの可能性があり、次の家で壁の位置が変わるかもしれない。理由が明確なのは？',['SHARP：どっちもドア','Panasonic：微凍結','三菱：氷点下ストッカー','東芝：摘みたて野菜室'],0,'どっちもドアは左右どちらからも開けられるため、設置環境や動線の変化に対応しやすいのが理由です。'],
+['大容量が欲しいが、キッチン通路への出っ張りを抑えたい。まず比較したいのは？',['AQUA：TZシリーズ','日立：特鮮氷温ルーム','三菱：朝どれ野菜室','SHARP：プラズマクラスター'],0,'AQUA TZシリーズは大容量と薄型設計を特徴としているため、奥行きを抑えたい要望と結びつきます。'],
+['Panasonicの微凍結を勧める理由として最も適切なのは？',['約−3℃で微凍結し、肉や魚を解凍せず使いやすい','野菜室が必ず真ん中','左右どちらからでも扉を開けられる','冷蔵室全体が約2℃'],0,'約−3℃の微凍結で、解凍せず切り分けやすいことが中心価値です。'],
+['冷蔵庫の容量を選ぶとき、人数以外で特に確認したいことは？',['買い物頻度・冷凍量・作り置き量','テレビのサイズ','Wi-Fi速度','エアコンの畳数'],0,'同じ人数でも、まとめ買いや冷凍・作り置きの量で必要な容量が変わります。'],
+['冷蔵庫本体の幅が設置場所より小さければ、設置可と断定してよい？',['いいえ。放熱・扉開閉・搬入経路まで確認する','はい。本体幅だけで決まる','高さだけ追加確認する','容量が500L以下なら問題ない'],0,'本体が置けても、放熱・ドア開閉・引き出し・搬入経路に問題がある場合があります。'],
+['「どっちもドア」と「つけかえどっちもドア」の説明として適切なのは？',['別方式なので型番ごとに確認する','完全に同じ方式','どちらもフレンチドア','どちらも全メーカー共通'],0,'どっちもドアは左右から開けられる方式、つけかえどっちもドアは開く向きを付け替える方式で、別物です。'],
+['年間消費電力量について適切なのは？',['容量だけで決めず、機種ごとの年間消費電力量で比べる','容量が大きいほど必ず高い','ドア枚数だけで決まる','冷凍室が大きいと必ず2倍になる'],0,'省エネ性能は断熱・制御・構造などでも変わるため、年間消費電力量で比較します。']
+];
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){localStorage.setItem(k,JSON.stringify(v))}};
+let favorites=store.get('reizo_favs',[]), user=store.get('reizo_user','Risa'), mission=store.get('reizo_mission',0);
+$('#userName').textContent=user; $('#nameInput').value=user; $('#missionHome').textContent=mission; $('#modalMission').textContent=mission;
+
+function go(id){$$('.page').forEach(p=>p.classList.remove('active')); $('#'+id).classList.add('active'); $$('.navBtn').forEach(b=>b.classList.toggle('active',b.dataset.go===id)); window.scrollTo({top:0,behavior:'smooth'}); if(id==='favorites') renderFavs()}
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+
+function fridgeMini(){return `<svg viewBox="0 0 42 68" width="42" height="68"><rect x="4" y="2" width="34" height="64" rx="5" fill="#eef5f8" stroke="#66808e" stroke-width="2"/><line x1="4" y1="28" x2="38" y2="28" stroke="#66808e" stroke-width="2"/><line x1="4" y1="46" x2="38" y2="46" stroke="#66808e" stroke-width="2"/><line x1="21" y1="2" x2="21" y2="28" stroke="#8da0aa"/></svg>`}
+function toggleFav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];store.set('reizo_favs',favorites);renderBrands();renderFavs()}
+function brandHTML(b){return `<article class="card brandCard"><button class="favBtn ${favorites.includes(b.id)?'on':''}" data-fav="${b.id}" aria-label="お気に入り">${favorites.includes(b.id)?'★':'☆'}</button><div class="brandTop"><div><span class="pill">${b.tag}</span><div class="brandName">${b.name}</div><div class="muted">${b.jp}</div></div><div class="brandIcon">${b.icon}</div></div><div class="brandCatch">${b.catch}</div><div class="whyBox"><b>なぜおすすめ？</b><br>${b.why}</div><button class="secondary detailsBtn">機能と接客理由を見る</button><div class="details">${b.features.map(f=>`<div class="featureRow"><strong>${f[0]}</strong><div>${f[1]}</div><div class="toCustomer">▶ こんなお客様：${f[2]}</div></div>`).join('')}<div class="warn"><b>型番確認</b><br>${b.caution}</div></div></article>`}
+function renderBrands(){
+ $('#brandGrid').innerHTML=BRANDS.map((b,i)=>brandHTML(b).replace('<article class=\"card brandCard\">',`<article class=\"card brandCard\" id=\"brand-${b.id}\">`)).join('');
+ $('#brandStrip').innerHTML=BRANDS.map(b=>`<button class="compareChip" data-scroll="${b.id}"><span>${b.icon}</span>${b.jp}</button>`).join('');
+ $$('.favBtn').forEach(x=>x.onclick=()=>toggleFav(x.dataset.fav));
+ $$('.detailsBtn').forEach(x=>x.onclick=()=>{let d=x.nextElementSibling;d.classList.toggle('open');x.textContent=d.classList.contains('open')?'閉じる':'機能と接客理由を見る'});$$('[data-scroll]').forEach(x=>x.onclick=()=>document.getElementById('brand-'+x.dataset.scroll)?.scrollIntoView({behavior:'smooth',block:'center'}));
+ const keys=['冷凍','野菜','冷蔵','動線','省スペース'];
+ $('#matrix').innerHTML=`<tr><th>比較軸</th>${BRANDS.map(b=>`<th>${b.jp}</th>`).join('')}</tr>`+keys.map(k=>`<tr><td>${k}</td>${BRANDS.map(b=>`<td class="dot3">${'●'.repeat(b.rates[k])}<span style="color:#dce8ef">${'●'.repeat(5-b.rates[k])}</span></td>`).join('')}</tr>`).join('');
+}
+renderBrands();
+
+$('#basicGrid').innerHTML=BASICS.map(x=>`<div class="card basicCard"><div class="basicIcon">${x[0]}</div><div><div class="sectionTitle" style="margin:0 0 5px">${x[1]}</div><div>${x[2]}</div><div class="reason"><b>なぜ？</b> ${x[3]}</div></div></div>`).join('');
+$('#capacityList').innerHTML=CAP.map(x=>`<div class="capacityRow"><div class="people">${x[0]}</div><div><b>${x[1]}</b><div class="muted">${x[3]}</div></div><div class="liters">${x[2]}</div></div>`).join('');
+function renderChecks(){let checks=store.get('reizo_checks',{});$('#checklist').innerHTML=CHECKS.map((x,i)=>`<label class="check"><div class="n">${i+1}</div><div><b>${x[0]}</b><div class="muted">${x[1]}</div></div><input type="checkbox" data-check="${i}" ${checks[i]?'checked':''}></label>`).join('');$$('[data-check]').forEach(c=>c.onchange=()=>{checks[c.dataset.check]=c.checked;store.set('reizo_checks',checks)})}
+renderChecks(); $('#resetChecks').onclick=()=>{store.set('reizo_checks',{});renderChecks()};
+
+$('#needs').innerHTML=NEEDS.map(x=>`<button class="need" data-need="${x[1]}">${x[0]}</button>`).join('');$$('.need').forEach(b=>b.onclick=()=>b.classList.toggle('on'));
+$('#diagnose').onclick=()=>{const s=$$('.need.on').map(x=>x.dataset.need), score=Object.fromEntries(BRANDS.map(b=>[b.id,0])), rs={};const add=(id,n,r)=>{score[id]+=n;(rs[id]??=[]).push(r)};
+ if(s.includes('freeze')){add('mitsubishi',4,'解凍せず使いやすい冷凍');add('sharp',4,'大容量冷凍');add('aqua',4,'冷凍保存に強い');add('toshiba',2,'3段冷凍室')}
+ if(s.includes('prep')){add('hitachi',4,'まるごとチルドで作り置きを置きやすい');add('panasonic',3,'微凍結・急冷系');add('mitsubishi',2,'必要量だけ使いやすい')}
+ if(s.includes('meat')){add('mitsubishi',5,'瞬冷凍＋氷点下保存');add('panasonic',4,'約−3℃微凍結');add('hitachi',4,'特鮮氷温ルーム')}
+ if(s.includes('veg')){add('toshiba',5,'野菜保存＋真ん中野菜室');add('mitsubishi',3,'朝どれ野菜室');add('hitachi',3,'野菜保存機能も候補')}
+ if(s.includes('thin')){add('aqua',5,'TZシリーズの薄型設計');add('sharp',2,'薄型系モデルも比較候補')}
+ if(s.includes('door')) add('sharp',6,'どっちもドアで左右動線に対応');
+ if(s.includes('nothaw')){add('mitsubishi',6,'切れちゃう瞬冷凍');add('panasonic',5,'微凍結で切り分けやすい')}
+ if(s.includes('clean')) add('sharp',5,'プラズマクラスター搭載機が候補');
+ if(s.includes('flex')) add('hitachi',6,'ぴったりセレクト搭載機が候補');
+ const order=Object.entries(score).sort((a,b)=>b[1]-a[1]).filter(x=>x[1]>0).slice(0,3); if(!order.length){$('#diagnosis').innerHTML='<div class="resultCard">気になる項目を1つ以上選んでください。</div>';return}
+ $('#diagnosis').innerHTML=`<div class="resultCard"><div class="sectionTitle">👑 おすすめ候補</div>${order.map(([id,n],i)=>{let b=BRANDS.find(x=>x.id===id);return `<div class="rankLine"><div class="rankNum">${i+1}</div><div><b style="font-size:20px">${b.jp}</b> <span class="pill">${b.tag}</span><div>${b.catch}</div><div class="toCustomer">理由：${(rs[id]||[]).join('／')}</div><div class="talk"><b>接客トーク例</b><br>「${b.why.replace(/。.*$/,'。')}」</div></div></div>`}).join('')}<div class="warn">診断は候補を絞る学習用。最終提案では容量・設置・予算・型番ごとの搭載機能を確認してください。</div></div>`;
 };
 
-let qi=0, correct=0, answered=0;
-function drawQ(){
- const q=DATA.questions[qi];
- document.getElementById('quizArea').innerHTML=`<div class="q">Q${qi+1}. ${q.q}</div><div id="opts">${q.opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div class="exp" id="exp"></div>`;
- document.querySelectorAll('.opt').forEach(o=>o.onclick=()=>{
-   if(document.querySelector('.opt.correct,.opt.wrong'))return;
-   const i=+o.dataset.i;answered++;
-   document.querySelectorAll('.opt')[q.a].classList.add('correct');
-   if(i!==q.a)o.classList.add('wrong'); else correct++;
-   document.getElementById('exp').innerHTML=`<b>${i===q.a?'⭕ 正解':'❌ 不正解'}</b><br>${q.exp}`;document.getElementById('exp').classList.add('show');
-   document.getElementById('score').textContent=`${correct} / ${answered}`;
-   document.getElementById('nextQ').style.display='inline-block';
- });
-}
-document.getElementById('nextQ').onclick=()=>{qi=(qi+1)%DATA.questions.length;document.getElementById('nextQ').style.display='none';drawQ()};
-drawQ();
+function renderFavs(){const list=BRANDS.filter(b=>favorites.includes(b.id));$('#favGrid').innerHTML=list.length?list.map(brandHTML).join(''):'<div class="card favEmpty">⭐ まだお気に入りはありません。<br>メーカー比較の「☆」から保存できます。</div>';$$('#favGrid .favBtn').forEach(x=>x.onclick=()=>toggleFav(x.dataset.fav));$$('#favGrid .detailsBtn').forEach(x=>x.onclick=()=>{let d=x.nextElementSibling;d.classList.toggle('open')})}
 
-if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
+let qi=0,qs=0,locked=false;function drawQuiz(){const q=QUIZ[qi];$('#qCount').textContent=`${qi+1} / ${QUIZ.length}`;$('#qScore').textContent=qs;$('#qProgress').style.width=`${(qi+1)/QUIZ.length*100}%`;$('#quizArea').innerHTML=`<div class="qText">Q${qi+1}. ${q[0]}</div>${q[1].map((o,i)=>`<button class="option" data-opt="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}<div class="explain" id="explain"></div>`;locked=false;$('#nextQ').style.display='none';$('#restartQ').style.display='none';$$('[data-opt]').forEach(o=>o.onclick=()=>answer(+o.dataset.opt));}
+function answer(i){if(locked)return;locked=true;const q=QUIZ[qi];$$('[data-opt]')[q[2]].classList.add('correct');if(i!==q[2])$$('[data-opt]')[i].classList.add('wrong');else{qs++;mission=Math.min(10,mission+1);store.set('reizo_mission',mission);$('#missionHome').textContent=mission;$('#modalMission').textContent=mission}$('#qScore').textContent=qs;$('#explain').classList.add('show');$('#explain').innerHTML=`<b>${i===q[2]?'⭕ 正解':'❌ 不正解'}</b><br>${q[3]}`;if(qi<QUIZ.length-1)$('#nextQ').style.display='inline-block';else{$('#restartQ').style.display='inline-block';$('#explain').innerHTML+=`<div class="mission"><div class="bigScore">${qs}/10</div>今回のスコア</div>`}}
+$('#nextQ').onclick=()=>{qi++;drawQuiz()};$('#restartQ').onclick=()=>{qi=0;qs=0;drawQuiz()};drawQuiz();
+$('#missionBtn').onclick=()=>go('quiz');
+
+$('#userBtn').onclick=()=>$('#userModal').classList.add('open');$('#closeModal').onclick=()=>$('#userModal').classList.remove('open');$('#saveName').onclick=()=>{user=$('#nameInput').value.trim()||'Risa';store.set('reizo_user',user);$('#userName').textContent=user;$('#userModal').classList.remove('open')};$('#userModal').onclick=e=>{if(e.target.id==='userModal')$('#userModal').classList.remove('open')};
+
+const tips=['冷凍重視？ 野菜重視？ まず「よく使う部屋」を聞くと、メーカー提案の理由が作りやすい。','「容量」より先に、週何回買い物するかを聞くと必要な余裕が見えてくる。','肉・魚をよく買うお客様には「冷凍するか、凍らせず保存したいか」まで聞く。','壁際設置では、本体幅だけでなく扉を十分開けられるかが大事。','大容量冷凍を求めるお客様には、容量だけでなく段数と食品収納スペースも確認。'];$('#dailyTip').textContent=tips[new Date().getDate()%tips.length];
+
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
 </body></html>
