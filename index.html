@@ -41,7 +41,7 @@
 <body>
 <div class="app">
 <header class="topbar">
-  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition</div></div></div></div>
+  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition <span style="opacity:.65">Ver.2.3</span></div></div></div></div>
   <button class="userbtn" id="userBtn">👤 <span id="userName">Risa</span>さん</button>
 </header>
 
@@ -225,13 +225,19 @@ $('#diagnose').onclick=()=>{const s=$$('.need.on').map(x=>x.dataset.need), score
 function renderFavs(){const list=BRANDS.filter(b=>favorites.includes(b.id));$('#favGrid').innerHTML=list.length?list.map(brandHTML).join(''):'<div class="card favEmpty">⭐ まだお気に入りはありません。<br>メーカー比較の「☆」から保存できます。</div>';$$('#favGrid .favBtn').forEach(x=>x.onclick=()=>toggleFav(x.dataset.fav));$$('#favGrid .detailsBtn').forEach(x=>x.onclick=()=>{let d=x.nextElementSibling;d.classList.toggle('open')})}
 
 let qi=0,qs=0,locked=false,currentChoices=[];
-function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function rotatedChoices(q,questionIndex){
+  const items=q[1].map((text,idx)=>({text,idx}));
+  // 問題ごとに1〜3個ずつ回して、正解位置がA/B/C/Dに必ず分散する。
+  // 同じ問題をやり直した時も正解位置が固定され、学習しやすい。
+  const shift=[1,2,3,0,2,1,3,1,2,3][questionIndex % 10];
+  return items.slice(shift).concat(items.slice(0,shift));
+}
 function drawQuiz(){
   const q=QUIZ[qi];
   $('#qCount').textContent=`${qi+1} / ${QUIZ.length}`;
   $('#qScore').textContent=qs;
   $('#qProgress').style.width=`${(qi+1)/QUIZ.length*100}%`;
-  currentChoices=shuffle(q[1].map((text,idx)=>({text,idx})));
+  currentChoices=rotatedChoices(q,qi);
   $('#quizArea').innerHTML=`<div class="qText">Q${qi+1}. ${q[0]}</div>${currentChoices.map((o,viewIdx)=>`<button class="option" data-opt="${o.idx}">${String.fromCharCode(65+viewIdx)}. ${o.text}</button>`).join('')}<div class="explain" id="explain"></div>`;
   locked=false;
   $('#nextQ').style.display='none';
@@ -239,14 +245,14 @@ function drawQuiz(){
   $$('[data-opt]').forEach(o=>o.onclick=()=>answer(+o.dataset.opt));
 }
 function answer(i){
-  if(locked) return;
+  if(locked)return;
   locked=true;
   const q=QUIZ[qi];
   const btns=$$('[data-opt]');
   const correctBtn=btns.find(b=>+b.dataset.opt===q[2]);
   const chosenBtn=btns.find(b=>+b.dataset.opt===i);
-  if(correctBtn) correctBtn.classList.add('correct');
-  if(i!==q[2] && chosenBtn) chosenBtn.classList.add('wrong');
+  if(correctBtn)correctBtn.classList.add('correct');
+  if(i!==q[2] && chosenBtn)chosenBtn.classList.add('wrong');
   else if(i===q[2]){
     qs++;
     mission=Math.min(10,mission+1);
@@ -257,8 +263,8 @@ function answer(i){
   $('#qScore').textContent=qs;
   $('#explain').classList.add('show');
   $('#explain').innerHTML=`<b>${i===q[2]?'⭕ 正解':'❌ 不正解'}</b><br>${q[3]}`;
-  if(qi<QUIZ.length-1) $('#nextQ').style.display='inline-block';
-  else {
+  if(qi<QUIZ.length-1)$('#nextQ').style.display='inline-block';
+  else{
     $('#restartQ').style.display='inline-block';
     $('#explain').innerHTML+=`<div class="mission"><div class="bigScore">${qs}/10</div>今回のスコア</div>`;
   }
@@ -266,6 +272,7 @@ function answer(i){
 $('#nextQ').onclick=()=>{qi++;drawQuiz()};
 $('#restartQ').onclick=()=>{qi=0;qs=0;drawQuiz()};
 drawQuiz();
+
 $('#missionBtn').onclick=()=>go('quiz');
 
 $('#userBtn').onclick=()=>$('#userModal').classList.add('open');$('#closeModal').onclick=()=>$('#userModal').classList.remove('open');$('#saveName').onclick=()=>{user=$('#nameInput').value.trim()||'Risa';store.set('reizo_user',user);$('#userName').textContent=user;$('#userModal').classList.remove('open')};$('#userModal').onclick=e=>{if(e.target.id==='userModal')$('#userModal').classList.remove('open')};
