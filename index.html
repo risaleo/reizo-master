@@ -41,9 +41,10 @@
 <body>
 <div class="app">
 <header class="topbar">
-  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition <span style="opacity:.65">Ver.2.3</span></div></div></div></div>
+  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition <span style="display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffeb9c;color:#8b5a00;font-weight:950">Ver.2.4</span></div></div></div></div>
   <button class="userbtn" id="userBtn">👤 <span id="userName">Risa</span>さん</button>
 </header>
+<div id="versionBanner" style="margin:8px 14px 0;padding:9px 12px;border-radius:14px;background:#073560;color:#fff;font-weight:950;text-align:center;box-shadow:0 5px 14px rgba(7,53,96,.18)">✅ 冷蔵庫販買マスター Ver.2.4</div>
 
 <section id="home" class="page active">
   <div class="hero">
@@ -279,6 +280,9 @@ $('#userBtn').onclick=()=>$('#userModal').classList.add('open');$('#closeModal')
 
 const tips=['冷凍重視？ 野菜重視？ まず「よく使う部屋」を聞くと、メーカー提案の理由が作りやすい。','「容量」より先に、週何回買い物するかを聞くと必要な余裕が見えてくる。','肉・魚をよく買うお客様には「冷凍するか、凍らせず保存したいか」まで聞く。','壁際設置では、本体幅だけでなく扉を十分開けられるかが大事。','大容量冷凍を求めるお客様には、容量だけでなく段数と食品収納スペースも確認。'];$('#dailyTip').textContent=tips[new Date().getDate()%tips.length];
 
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js?v=24',{updateViaCache:'none'}).then(reg=>reg.update()).catch(()=>{});
+}
+if('caches' in window){caches.keys().then(keys=>Promise.all(keys.filter(k=>k!=='reizo-v24-assets').map(k=>caches.delete(k)))).catch(()=>{});}
 </script>
 </body></html>
