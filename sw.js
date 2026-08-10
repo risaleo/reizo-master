@@ -1,5 +1,5 @@
 const C='reizo-v24-assets';
-const ASSETS=['./assets/home-guide.png','./assets/compare-guide.png','./assets/basic-guide.png','./assets/capacity-guide.png','./assets/install-guide.png','./assets/sales-guide.png','./assets/quiz-guide.png','./icon-192.png','./icon-512.png'];
+const ASSETS=['./home-guide.png','./compare-guide.png','./basic-guide.png','./capacity-guide.png','./install-guide.png','./sales-guide.png','./quiz-guide.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(C).then(c=>c.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{
