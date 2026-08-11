@@ -3,8 +3,8 @@
   "short_name": "冷蔵庫マスター",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f5fbff",
-  "theme_color": "#eaf7ff",
+  "background_color": "#f5faff",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "icon-192.png",
