@@ -28,12 +28,11 @@
 .bottom{position:fixed;bottom:0;left:0;right:0;z-index:40;background:rgba(255,255,255,.97);border-top:1px solid #cfe1ec;display:grid;grid-template-columns:repeat(6,1fr);max-width:1180px;margin:auto;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -8px 25px rgba(15,57,88,.08)}.navBtn{border:0;background:transparent;color:#657783;padding:9px 2px 7px;font-size:11px;font-weight:800}.navBtn span{font-size:24px;display:block;line-height:1}.navBtn.active{color:var(--blue);background:#eff9ff}
 .modal{position:fixed;inset:0;background:rgba(5,34,54,.48);z-index:100;display:none;place-items:center;padding:20px}.modal.open{display:grid}.modalBox{background:#fff;border-radius:22px;padding:20px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25)}.modalBox h3{margin-top:0}.nameInput{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px}
 .sources{font-size:13px;color:var(--muted)}
-.appBack{display:inline-flex;align-items:center;gap:6px;border:1px solid #cfe3f0;background:#fff;color:var(--nav);border-radius:999px;padding:9px 14px;font-weight:950;box-shadow:0 5px 16px rgba(18,65,94,.10);margin:4px 0 10px;position:sticky;top:68px;z-index:22}
-.visualHero{margin:2px 0 16px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
-.visualHero img{display:block;width:100%;height:240px;object-fit:cover;object-position:top center}
+.appBack{display:none !important} .visualHero{margin:2px 0 16px;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.visualHero img{display:block;width:100%;height:auto;object-fit:contain;object-position:top center}
 .visualCaption{padding:9px 13px;font-size:13px;color:var(--muted);background:#fff}
-.homeVisual{margin:0 14px 16px}.homeVisual img{height:300px}
-@media(max-width:820px){.visualHero img{height:205px}.homeVisual img{height:220px}.appBack{top:64px}}
+.homeVisual{display:none}
+@media(max-width:820px){.visualHero img{height:auto}}
 @media(max-width:820px){body{font-size:16px}.hero{grid-template-columns:1fr .45fr;padding:17px}.fridgeHero{height:170px}.fridgeSvg{width:125px}.foodbubble{width:70px;height:70px;font-size:34px}.quick{grid-template-columns:repeat(2,1fr)}.grid6,.grid3,.grid2{grid-template-columns:1fr}.compareStrip{grid-template-columns:repeat(3,1fr)}.capacityRow{grid-template-columns:60px 1fr}.capacityRow .liters{grid-column:2}.pageHead{display:block}.pageHead p{margin-top:4px}.bottom{grid-template-columns:repeat(6,1fr)}.navBtn{font-size:10px}.navBtn span{font-size:22px}}
 @media(max-width:520px){.title{font-size:17px}.logoMini{width:38px;height:38px}.userbtn{font-size:13px;padding:6px 8px}.topBackBtn{padding:7px 10px;font-size:14px}.hero{margin:9px;border-radius:21px;grid-template-columns:1fr}.fridgeHero{display:none}.quick{padding:0 9px 12px;gap:8px}.quickBtn{min-height:102px;padding:11px 6px}.page{padding:5px 9px 18px}.pageHead h2{font-size:25px}.card{padding:14px}.compareStrip{gap:5px}.compareChip{font-size:11px;padding:7px 2px}.brandName{font-size:22px}.bottom{overflow-x:auto}.navBtn{min-width:60px}}
 </style>
@@ -41,17 +40,16 @@
 <body>
 <div class="app">
 <header class="topbar">
-  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition <span style="display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffeb9c;color:#8b5a00;font-weight:950">Ver.2.4</span></div></div></div></div>
+  <div class="topbarLeft"><button class="topBackBtn hidden" id="topBack" type="button">← 戻る</button><div class="titlewrap"><div class="logoMini">❄️</div><div><div class="title">冷蔵庫販買マスター</div><div class="edition">Risa Edition <span style="display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffeb9c;color:#8b5a00;font-weight:950">Ver.2.5</span></div></div></div></div>
   <button class="userbtn" id="userBtn">👤 <span id="userName">Risa</span>さん</button>
 </header>
-<div id="versionBanner" style="margin:8px 14px 0;padding:9px 12px;border-radius:14px;background:#073560;color:#fff;font-weight:950;text-align:center;box-shadow:0 5px 14px rgba(7,53,96,.18)">✅ 冷蔵庫販買マスター Ver.2.4</div>
+<div id="versionBanner" style="margin:8px 14px 0;padding:8px 12px;border-radius:14px;background:#073560;color:#fff;font-weight:950;text-align:center;box-shadow:0 5px 14px rgba(7,53,96,.18)">✅ 冷蔵庫販買マスター Ver.2.5</div>
 
 <section id="home" class="page active">
   <div class="hero">
     <div><span class="heroTag">👑 販売員向け・理由で覚える</span><h1><b>冷蔵庫</b><br>販買マスター</h1><p>「このメーカーが良い」だけで終わらない。<b>なぜ良いのか → どんなお客様に合うのか</b>まで、絵と一緒に覚えよう。</p></div>
     <div class="fridgeHero"><svg class="fridgeSvg" viewBox="0 0 180 250" aria-label="冷蔵庫イラスト"><defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#f9fdff"/><stop offset="1" stop-color="#c9d9e3"/></linearGradient></defs><rect x="32" y="8" width="116" height="232" rx="15" fill="url(#g)" stroke="#577383" stroke-width="4"/><line x1="32" y1="105" x2="148" y2="105" stroke="#577383" stroke-width="4"/><line x1="32" y1="160" x2="148" y2="160" stroke="#577383" stroke-width="4"/><line x1="90" y1="8" x2="90" y2="105" stroke="#7b929f" stroke-width="3"/><rect x="124" y="42" width="5" height="35" rx="3" fill="#587789"/><rect x="124" y="121" width="5" height="24" rx="3" fill="#587789"/></svg><div class="foodbubble one">🥬</div><div class="foodbubble two">🥩</div></div>
   </div>
-  <div class="visualHero homeVisual"><img src="home-guide.png" alt="冷蔵庫販買マスターの学習画面イメージ"><div class="visualCaption">絵で見て理解 → 理由で説明 → 接客で使える、を1つのアプリに。</div></div>
   <div class="quick">
     <button class="quickBtn" data-go="compare"><span class="ico">⚖️</span><b>メーカー比較</b><small>6社の強みを理由で比較</small></button>
     <button class="quickBtn" data-go="basics"><span class="ico">📘</span><b>冷蔵庫の基礎</b><small>容量・部屋・省エネ</small></button>
